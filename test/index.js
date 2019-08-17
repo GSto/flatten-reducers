@@ -47,7 +47,6 @@ describe('Awesome test.', () => {
     actualStore = flatReducer(actualStore, changeFirstName)
     actualStore = flatReducer(actualStore, changeLastName)
 
-    assert(actualStore === expectedStore, 'stores are equal')
     assert(actualStore.first_name === expectedStore.first_name, 'first names are equal')
     assert(actualStore.last_name === expectedStore.last_name, 'last names are equal')
   });
