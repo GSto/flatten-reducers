@@ -1,10 +1,9 @@
 {
-  "name": "npm-module-boilerplate",
-  "version": "1.0.0",
-  "description": "Boilerplate for npm modules with ES6 features and syntax",
+  "name": "flatten-reducers",
+  "version": "0.1.0",
+  "description": "Combine several same level reducers into a single function",
   "main": "./lib/index.js",
   "scripts": {
-    "clean": "rimraf lib",
     "test": "npm run lint && npm run cover",
     "test:prod": "cross-env BABEL_ENV=production npm run test",
     "test:only": "mocha --require babel-core/register --require babel-polyfill --recursive",
@@ -16,30 +15,27 @@
     "prepublish": "npm run clean && npm run lint && npm run test && npm run build"
   },
   "files": [
-    "lib",
     "src"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/flexdinesh/npm-module-boilerplate.git"
+    "url": "git+https://github.com/GSto/flatten-reducers.git"
   },
   "keywords": [
-    "boilerplate",
-    "npm",
-    "module",
-    "node",
-    "javascript"
+    "reducer",
+    "state management"
   ],
-  "author": "Dinesh Pandiyan <flexdinesh@gmail.com>",
+  "author": "Glenn Stovall <glenn@concordantsolutions.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/flexdinesh/npm-module-boilerplate/issues"
+    "url": "https://github.com/GSto/flatten-reducers/issues"
   },
-  "homepage": "https://github.com/flexdinesh/npm-module-boilerplate#readme",
+  "homepage": "https://github.com/GSto/flatten-reducers/blob/master/README.md",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-add-module-exports": "^1.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-minify": "^0.5.0",

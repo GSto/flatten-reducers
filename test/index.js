@@ -1,14 +1,54 @@
+
 import { assert } from 'chai';
-import defaultAwesomeFunction, { awesomeFunction } from '../src';
+
+import flattenReducers from '../src';
 
 describe('Awesome test.', () => {
-  it('should test default awesome function', () => {
-    const expectedVal = 'I am the Default Awesome Function, fellow comrade! - Dinesh';
-    assert(defaultAwesomeFunction('Dinesh') === expectedVal, 'Default not awesome :(');
-  });
+  it('given two reducers, returns a reducer that handle actions of both', () => {
+    const firstNameReducer = (state = {}, action) => {
+      switch (action.type) {
+        case 'UPDATE_FIRST_NAME':
+          return {
+            ...state,
+            first_name: action.payload,
+          };
+        default:
+          return state
+      }
+    }
 
-  it('should test awesome function', () => {
-    const expectedVal = 'I am just an Awesome Function';
-    assert(awesomeFunction() === expectedVal, 'Named awesome :(');
+    const lastNameReducer = (state = {}, action) => {
+      switch (action.type) {
+        case 'UPDATE_LAST_NAME':
+          return {
+            ...state,
+            last_name: action.payload,
+          };
+        default:
+          return state
+      }
+    };
+
+    const startingState = {
+      first_name: 'Ashley',
+      last_name: 'Kennedy',
+    };
+
+    const changeFirstName = { type: 'UPDATE_FIRST_NAME', payload: 'Ashleigh' }
+    const changeLastName = { type: 'UPDATE_LAST_NAME', payload: 'Kennedeigh' }
+
+    let expectedStore = startingState
+    expectedStore = firstNameReducer(expectedStore, changeFirstName)
+    expectedStore = lastNameReducer(expectedStore, changeLastName)
+
+    const flatReducer = flattenReducers(firstNameReducer, lastNameReducer)
+
+    let actualStore = startingState
+    actualStore = flatReducer(actualStore, changeFirstName)
+    actualStore = flatReducer(actualStore, changeLastName)
+
+    assert(actualStore === expectedStore, 'stores are equal')
+    assert(actualStore.first_name === expectedStore.first_name, 'first names are equal')
+    assert(actualStore.last_name === expectedStore.last_name, 'last names are equal')
   });
 });
